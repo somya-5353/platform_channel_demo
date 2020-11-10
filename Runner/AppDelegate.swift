@@ -14,7 +14,8 @@ import Flutter
        messageChannel.setMethodCallHandler({
          (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
          switch (call.method) {
-          case "getMessage": result("This a text from native XCode")
+         case "getMessage": let sum = self.calculateSum(listOfNumbers: call.arguments as! [Int])
+             result(sum)
           default: result(FlutterMethodNotImplemented)
           }
        })
@@ -23,4 +24,13 @@ import Flutter
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+    
+  private func calculateSum(listOfNumbers: [Int]) -> Int {
+      var sum = 0;
+      listOfNumbers.forEach { (num) in
+          sum = sum + num;
+      }
+      return sum;
+  }
+
 }
